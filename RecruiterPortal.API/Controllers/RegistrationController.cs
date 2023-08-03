@@ -38,6 +38,31 @@ namespace RecruiterPortal.API.Controllers
             }
         }
 
+        [Route("get-agency")]
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetAgencyByURL()
+        {
+            try
+            {
+                return Ok(AgencyManager.GetAgencies());
+            }
+            catch (Exception ex)
+            {
+                //Log.Write(ex);
+                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
+                //{
+                //    return StatusCode(500);
+                //}
+                //else
+                //{
+                //    return StatusCode(500, ex);
+                //}
+
+                return StatusCode(500, ex);
+            }
+        }
+
         [Route("get-agency-by-url/{url}")]
         [HttpGet]
         [AllowAnonymous]
