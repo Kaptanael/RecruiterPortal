@@ -1,4 +1,5 @@
-﻿using ApplicantPortalDAL.Repository;
+﻿using Microsoft.Data.SqlClient;
+using RecruiterPortal.DAL.SqlModels;
 using System.Data;
 using System.Dynamic;
 
@@ -6,13 +7,11 @@ namespace RecruiterPortal.DAL.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private Repository<T> _repo = null;
-        //private DbSet<T> table = null;
+        private Repository<T> _repo = null;        
 
         public GenericRepository()
         {
-            this._repo = new Repository<T>(new UMRRecruitmentApplicantEntities());
-            //table = _context.Set<T>();
+            _repo = new Repository<T>(new UmrrecruitmentApplicantContext());            
         }
 
         public IEnumerable<T> GetAll(string storedProcedureName, SqlParameter[] parameters = null)
